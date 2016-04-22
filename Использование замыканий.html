@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Использование замыканий</title>
+</head>
+<body>
+<script>
+    /* Строковый буфер с очисткой
+     function makeBuffer () {
+     var string = '';
+     function buffer () {
+     if (arguments[0] === undefined) return string;
+     else {
+     string += arguments[0];
+     }
+
+     }
+     buffer.clear = function () {
+     string = '';
+     }
+     return buffer;
+     }
+
+     var buffer = makeBuffer();
+
+     // добавить значения к буферу
+     buffer('Замыкания');
+     buffer(' Использовать');
+     buffer(' Нужно!');
+     alert( buffer() ); // Замыкания Использовать Нужно!
+     buffer.clear();
+     alert( buffer() );
+     */
+
+    /* Сортировка
+     var users = [{
+     name: "Вася",
+     surname: 'Иванов',
+     age: 20
+     }, {
+     name: "Петя",
+     surname: 'Чапаев',
+     age: 25
+     }, {
+     name: "Маша",
+     surname: 'Медведева',
+     age: 18
+     }];
+
+     function byField(field) {
+     return function (a, b) {
+     return a[field] > b[field] ? 1 : -1;
+     }
+     }
+
+     users.sort(byField('name'));
+     users.forEach(function (user) {
+     alert(user.name);
+     }); // Вася, Маша, Петя
+
+     users.sort(byField('age'));
+     users.forEach(function (user) {
+     alert(user.name);
+     }); // Маша, Вася, Петя
+     */
+
+    /* Фильтрация через функцию
+     var arr = [1, 2, 3, 4, 5, 6, 7];
+     function inBetween(a,b) {
+     return function (x) {
+     return x >= a && x <= b ? true : false;
+     }
+     }
+
+     function inArray(arr) {
+     return function (x) {
+     for (var i = 0; i < arr.length; i++) {
+     if (x === arr[i]) return true;
+     }
+     return false;
+     }
+     }
+
+     function filter(arr, func) {
+     var result = [];
+     for (var i = 0; i < arr.length; i++) {
+     if (func(arr[i])) result.push(arr[i]);
+     }
+     return result;
+     }
+
+     alert(filter(arr, function(a) {
+     return a % 2 == 0
+     })); // 2,4,6
+
+     alert( filter(arr, inBetween(3, 6)) ); // 3,4,5,6
+
+     alert( filter(arr, inArray([1, 2, 10])) ); // 1,2
+     */
+
+    /* Армия функций
+     function makeArmy() {
+
+     var shooters = [];
+
+     for (var i = 0; i < 10; i++)(function(i) {
+
+     var shooter = function() {
+     alert( i );
+     };
+
+     shooters.push(shooter);
+
+     })(i);
+
+     return shooters;
+     }
+
+     var army = makeArmy();
+
+     army[0](); // 0
+     army[1](); // 1
+     */
+
+    /* Содай калькулятор
+    var calculator = {
+        a: 0,
+        b: 0,
+        read: function () {
+            this.a = +prompt('a?', 0);
+            this.b = +prompt('b?', 0);
+        },
+        sum: function () {
+            return this.a + this.b;
+        },
+        mul: function () {
+            return this.a * this.b;
+        }
+    };
+
+    calculator.read();
+    alert(calculator.sum());
+    alert(calculator.mul());
+    */
+
+    /* Цепочка вызовов
+    var ladder = {
+        step: 0,
+        up: function() { // вверх по лестнице
+            this.step++;
+            return this;
+        },
+        down: function() { // вниз по лестнице
+            this.step--;
+            return this;
+        },
+        showStep: function() { // вывести текущую ступеньку
+            alert( this.step );
+            return this;
+        }
+    };
+
+    ladder.up().up().down().up().down().showStep();
+     */
+
+    /* Сумма произвольного количества скобок */
+    function sum (a) {
+        var sum = a;
+        function f (b) {
+            sum += b;
+            return f;
+        }
+        f.toString = function () {
+            return sum;
+        }
+        return f;
+    }
+    alert( sum(1)(2) ); // 3
+    alert( sum(5)(-1)(2) ); // 6
+    alert( sum(6)(-1)(-2)(-3) ); // 0
+    alert( sum(0)(1)(2)(3)(4)(5) ); // 15
+
+</script>
+
+</body>
+</html>

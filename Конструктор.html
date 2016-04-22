@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Конструктор</title>
+</head>
+<body>
+<script>
+    /* Создать Calculator при помощи конструктора
+    function Calculator() {
+        this.a = 0;
+        this.b = 0;
+        this.read = function () {
+            this.a = +prompt('a?', 0);
+            this.b = +prompt('b?', 0);
+        }
+        this.sum = function () {
+            return this.a + this.b;
+        }
+        this.mul = function () {
+            return this.a * this.b;
+        }
+    }
+    var calculator = new Calculator();
+    calculator.read();
+
+    alert( "Сумма=" + calculator.sum() );
+    alert( "Произведение=" + calculator.mul() );
+    */
+
+    /* Создать Calculator при помощи конструктора
+    function Accumulator(a) {
+        this.value = a;
+        this.read = function () {
+            this.value += +prompt("?", 0);
+        }
+    }
+
+
+    var accumulator = new Accumulator(1); // начальное значение 1
+    accumulator.read(); // прибавит ввод prompt к текущему значению
+    accumulator.read(); // прибавит ввод prompt к текущему значению
+    alert( accumulator.value ); // выведет текущее значение
+
+     /* Создать улучшенный Calculator при помощи конструктора
+    function Calculator() {
+        var methods = {
+            "+": function (a, b) {
+                return a+b;
+            },
+            "-": function (a, b) {
+                return a-b;
+            }
+        };
+        this.calculate = function (str) {
+            var arr = str.split(" ");
+            var a = arr[0];
+            var op = arr[1];
+            var b = arr[2];
+            if (!methods[op] || isNaN(a) || isNaN(b)) {
+                return NaN;
+            }
+            return methods[op](+a,+b);
+        }
+        this.addMethod = function (name, func) {
+            methods[name] = func;
+        }
+    }
+    var calc = new Calculator;
+
+    alert( calc.calculate("3 + 7") ); // 10
+
+    var powerCalc = new Calculator;
+    powerCalc.addMethod("*", function(a, b) {
+        return a * b;
+    });
+    powerCalc.addMethod("/", function(a, b) {
+        return a / b;
+    });
+    powerCalc.addMethod("**", function(a, b) {
+        return Math.pow(a, b);
+    });
+
+    var result = powerCalc.calculate("2 ** 3");
+    alert( result );// 8
+    */
+
+    /*
+
+    function Article() {
+        Article.count++;
+        Article.created = new Date();
+    }
+    Article.count = 0;
+
+    Article.showCount = function() {
+        alert( this.count ); // (1)
+    }
+    Article.showStats = function () {
+        alert("Всего: " + this.count + ", Последняя: " + this.created);
+    }
+
+    // использование
+    new Article();
+    new Article();
+
+    Article.showStats(); // Всего: 2, Последняя: (дата)
+
+    new Article();
+
+    Article.showStats(); // Всего: 3, Последняя: (дата)
+
+    */
+
+    /*
+
+    function sumArgs() {
+        var args = [].slice.call(arguments);
+        var sum = 0;
+        arguments.reduce = [].reduce;
+        return arguments.reduce(function (a, b) {
+           return a+b;
+        });
+    }
+
+    alert( sumArgs(1, 2, 3) ); // 6, аргументы переданы через запятую, без массива
+
+    */
+    function applyAll (func) {
+        return func.apply(this, [].slice.call(arguments, 1));
+    }
+
+
+
+    function sum() { // суммирует аргументы: sum(1,2,3) = 6
+        return [].reduce.call(arguments, function(a, b) {
+            return a + b;
+        });
+    }
+
+    function mul() { // перемножает аргументы: mul(2,3,4) = 24
+        return [].reduce.call(arguments, function(a, b) {
+            return a * b;
+        });
+    }
+
+    alert( applyAll(sum, 1, 2, 3) ); // -> sum(1, 2, 3) = 6
+    alert( applyAll(mul, 2, 3, 4) ); // -> mul(2, 3, 4) = 24
+
+</script>
+
+</body>
+</html>

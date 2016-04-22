@@ -1,0 +1,131 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Методы массивов</title>
+
+</head>
+<body>
+<script>
+    /* Добавить класс в строку
+     var obj = {
+     className: 'open menu'
+     };
+     function addClass(obj, cls) {
+     var classes = obj.className ? obj.className.split(" ") : [];
+     for (var i = 0; i < classes.length; i++) {
+     if (classes[i] === cls) return;
+     }
+     classes.push(cls);
+     obj.className = classes.join(" ");
+     }
+     addClass(obj, 'new'); // obj.className='open menu new'
+     addClass(obj, 'open'); // без изменений (класс уже существует)
+     addClass(obj, 'me'); // obj.className='open menu new me'
+
+     alert( obj.className ); // "open menu new me"
+     */
+
+    /*Перевести текст вида border-left-width в borderLeftWidth
+     function camelize(str) {
+     var arr = str.split("-");
+     for (var i = 1; i < arr.length; i++) {
+     arr[i] = arr[i].charAt(0).toUpperCase() + arr[i].slice(1);
+     }
+     return arr.join("");
+
+     }
+
+     alert(camelize("background-color") == 'backgroundColor');
+     alert(camelize("list-style-image") == 'listStyleImage');
+     alert(camelize("-webkit-transition") == 'WebkitTransition');
+     */
+
+    /*Функция removeClass
+     function removeClass(obj, cls) {
+     var classes = obj.className ? obj.className.split(" ") : [];
+     for (var i = 0; i < classes.length; i++) {
+     if (classes[i] === cls) {
+     classes.splice(i, 1);
+     i--;
+     }
+     }
+     return obj.className = classes.join(' ');
+     }
+
+     obj = {
+     className: 'my menu menu'
+     };
+     removeClass(obj, 'menu');
+     alert( obj.className ); // 'my'
+     */
+
+    /*Фильтрация массива "на месте"
+     function filterRangeInPlace(arr, a, b) {
+     for (var i = 0; i < arr.length; i++) {
+     if (arr[i] < a || arr[i] > b) {
+     arr.splice(i, 1);
+     i--;
+     }
+     }
+     }
+
+
+     arr = [5, 3, 8, 1];
+
+     filterRangeInPlace(arr, 1, 4); // удалены числа вне диапазона 1..4
+
+     alert( arr ); // массив изменился: остались [3, 1]
+     */
+
+    /*Сортировать в обратном порядке
+     var arr = [5, 2, 1, -10, 8];
+     function sortit(a, b) {
+     if (a > b) return -1;
+     else return 1;
+     }
+     arr.sort(sortit);
+
+     alert( arr ); // 8, 5, 2, 1, -10
+
+
+     /* Вывести односвязный список
+     var list = { value: 1 };
+     list.next = { value: 2 };
+     list.next.next = { value: 3 };
+     list.next.next.next = { value: 4 };
+
+     function printList(obj) {
+     while (obj.value) {
+     alert(obj.value);
+     obj = obj.next;
+     }
+     }
+
+     function printListr(obj) {
+     alert(obj.value);
+     printListr(obj.next);
+     }
+
+     function printReverseList(obj) {
+     if (obj.next) {
+     printReverseList(obj.next);
+     }
+     alert(obj.value);
+     }
+     printReverseList(list);
+     */
+
+
+
+    function sum(a) {
+        return function(b) {
+            return a+b;
+        }
+    }
+    alert(sum(1)(2));
+    var g = sum();
+    alert(g(2));
+</script>
+</body>
+</html>
